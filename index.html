@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJ CGV 브랜드 전략</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0a0a0f;
+    color: #e8e8e8;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 100;
+    padding: 0 48px;
+    display: flex; align-items: center; gap: 32px; height: 56px;
+  }
+  nav .logo { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.12em; text-transform: uppercase; margin-right: auto; }
+  nav a { font-size: 12px; color: rgba(255,255,255,0.45); text-decoration: none; cursor: pointer; transition: color 0.2s; letter-spacing: 0.04em; }
+  nav a:hover { color: #fff; }
+
+  /* SECTIONS */
+  section { min-height: 100vh; padding: 120px 48px 80px; max-width: 1100px; margin: 0 auto; }
+
+  /* COVER */
+  #cover {
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 100vh; padding-top: 80px;
+  }
+  .cover-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
+  .cover-title { font-size: clamp(48px, 7vw, 88px); font-weight: 700; line-height: 1.05; color: #fff; margin-bottom: 24px; }
+  .cover-title em { color: #e63946; font-style: normal; }
+  .cover-sub { font-size: 18px; color: rgba(255,255,255,0.45); font-weight: 300; max-width: 520px; margin-bottom: 60px; line-height: 1.8; }
+  .cover-scroll { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+
+  /* SECTION HEADER */
+  .sec-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e63946; margin-bottom: 12px; }
+  .sec-title { font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+  .sec-desc { font-size: 15px; color: rgba(255,255,255,0.45); max-width: 600px; margin-bottom: 64px; line-height: 1.8; font-weight: 300; }
+
+  /* DIVIDER */
+  .div-line { width: 48px; height: 2px; background: #e63946; margin: 24px 0 48px; }
+
+  /* PHILOSOPHY CARD */
+  .big-quote {
+    border-left: 3px solid #e63946;
+    padding: 32px 40px;
+    background: rgba(230,57,70,0.05);
+    border-radius: 0 12px 12px 0;
+    margin: 48px 0;
+  }
+  .big-quote p { font-size: clamp(18px, 2.5vw, 26px); font-weight: 500; color: #fff; line-height: 1.6; }
+  .big-quote span { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 12px; display: block; }
+
+  /* CONTEXT GRID */
+  .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 64px; }
+  .ctx-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 28px 32px;
+    transition: border-color 0.2s;
+  }
+  .ctx-card:hover { border-color: rgba(230,57,70,0.3); }
+  .ctx-icon { font-size: 22px; margin-bottom: 12px; }
+  .ctx-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #e63946; margin-bottom: 8px; }
+  .ctx-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; }
+
+  /* BRAND PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 48px 0; }
+  .pillar {
+    background: rgba(255,255,255,0.03);
+    padding: 36px 24px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .pillar:first-child { border-radius: 12px 0 0 12px; }
+  .pillar:last-child { border-radius: 0 12px 12px 0; }
+  .pillar:hover { background: rgba(230,57,70,0.08); border-color: rgba(230,57,70,0.25); transform: translateY(-4px); }
+  .pillar-num { font-size: 11px; color: #e63946; letter-spacing: 0.15em; margin-bottom: 16px; }
+  .pillar-word { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .pillar-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+  /* VS TABLE */
+  .vs-table { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; margin: 48px 0; align-items: stretch; }
+  .vs-col { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 32px; }
+  .vs-col.right { background: rgba(230,57,70,0.06); border-color: rgba(230,57,70,0.2); }
+  .vs-sep { display: flex; align-items: center; justify-content: center; width: 48px; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; writing-mode: vertical-rl; }
+  .vs-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+  .vs-col.right .vs-label { color: #e63946; }
+  .vs-item { font-size: 14px; color: rgba(255,255,255,0.55); padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5; }
+  .vs-col.right .vs-item { color: rgba(255,255,255,0.8); }
+  .vs-item:last-child { border-bottom: none; }
+
+  /* STRATEGY TRACKS */
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 48px 0; }
+  .track { border-radius: 16px; padding: 40px; border: 1px solid rgba(255,255,255,0.07); }
+  .track-a { background: rgba(255,255,255,0.02); }
+  .track-b { background: rgba(230,57,70,0.04); border-color: rgba(230,57,70,0.15); }
+  .track-tag { display: inline-block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px; font-weight: 700; }
+  .track-a .track-tag { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); }
+  .track-b .track-tag { background: rgba(230,57,70,0.15); color: #e63946; }
+  .track-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .track-time { font-size: 12px; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
+  .track-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+  .track-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.25); margin-top: 7px; flex-shrink: 0; }
+  .track-b .track-dot { background: #e63946; }
+  .track-item p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .track-b .track-item p { color: rgba(255,255,255,0.7); }
+
+  /* INITIATIVES */
+  .initiatives { display: flex; flex-direction: column; gap: 2px; margin: 48px 0; }
+  .init-row {
+    display: grid; grid-template-columns: 60px 1fr 2fr 120px;
+    gap: 0; align-items: stretch;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .init-row:hover { border-color: rgba(230,57,70,0.25); }
+  .init-row.header { background: rgba(255,255,255,0.04); cursor: default; }
+  .init-row.header:hover { border-color: rgba(255,255,255,0.06); }
+  .init-cell { padding: 18px 20px; font-size: 13px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; }
+  .init-cell:last-child { border-right: none; }
+  .init-row.header .init-cell { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .init-num { color: #e63946; font-weight: 700; font-size: 14px; }
+  .init-name { color: #fff; font-weight: 500; }
+  .init-desc { color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .init-tag { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+  .tag-now { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); }
+  .tag-mid { background: rgba(230,57,70,0.12); color: #e63946; }
+  .tag-long { background: rgba(99,102,241,0.12); color: #818cf8; }
+
+  /* CLOSING */
+  #closing {
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 80vh;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .closing-main { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; color: #fff; line-height: 1.4; max-width: 700px; margin-bottom: 32px; }
+  .closing-main em { color: #e63946; font-style: normal; }
+  .closing-sub { font-size: 15px; color: rgba(255,255,255,0.35); max-width: 560px; line-height: 1.8; font-weight: 300; }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint { position: fixed; right: 32px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 50; }
+  .scroll-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s; }
+  .scroll-dot.active { background: #e63946; transform: scale(1.4); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; gap: 16px; }
+    nav a { display: none; }
+    section { padding: 100px 24px 60px; }
+    .context-grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr 1fr; }
+    .pillar:first-child { border-radius: 12px 0 0 0; }
+    .pillar:last-child { border-radius: 0 0 12px 12px; }
+    .vs-table { grid-template-columns: 1fr; }
+    .vs-sep { display: none; }
+    .tracks { grid-template-columns: 1fr; }
+    .init-row { grid-template-columns: 40px 1fr; }
+    .init-cell:nth-child(3), .init-cell:nth-child(4) { display: none; }
+    .scroll-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">CJ CGV — Brand Strategy</div>
+  <a onclick="scrollTo('cover')">개요</a>
+  <a onclick="scrollTo('context')">시대 맥락</a>
+  <a onclick="scrollTo('philosophy')">브랜드 철학</a>
+  <a onclick="scrollTo('strategy')">전략</a>
+  <a onclick="scrollTo('initiatives')">실행</a>
+  <a onclick="scrollTo('closing')">결론</a>
+</nav>
+
+<div class="scroll-hint">
+  <div class="scroll-dot active" id="dot-0" onclick="scrollTo('cover')"></div>
+  <div class="scroll-dot" id="dot-1" onclick="scrollTo('context')"></div>
+  <div class="scroll-dot" id="dot-2" onclick="scrollTo('philosophy')"></div>
+  <div class="scroll-dot" id="dot-3" onclick="scrollTo('strategy')"></div>
+  <div class="scroll-dot" id="dot-4" onclick="scrollTo('initiatives')"></div>
+  <div class="scroll-dot" id="dot-5" onclick="scrollTo('closing')"></div>
+</div>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover-eyebrow">CJ CGV · 브랜드 전략 제안 · 2026</div>
+  <h1 class="cover-title">인간이 인간으로<br><em>돌아오는 시간</em></h1>
+  <p class="cover-sub">CGV는 영화관이 아닙니다.<br>AI와 플랫폼의 시대에, 가장 인간다운 공간의 정수가 되어야 합니다.</p>
+  <div class="cover-scroll">scroll to explore ↓</div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context">
+  <div class="sec-num">01 · 시대 맥락</div>
+  <h2 class="sec-title">왜 지금인가</h2>
+  <div class="div-line"></div>
+  <p class="sec-desc">AI 고도화와 정보 과잉의 시대. 사람들은 구조적 피로를 겪고 있습니다. 그리고 그 답은 이미 극장 안에 있습니다.</p>
+
+  <div class="context-grid">
+    <div class="ctx-card">
+      <div class="ctx-icon">⚡</div>
+      <div class="ctx-label">정보 과잉</div>
+      <div class="ctx-text">봐야 할 것, 해야 할 것이 너무 많은 시대. 효율과 기술, 플랫폼에서 벗어나고 싶은 욕망이 커지고 있습니다.</div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-icon">🤖</div>
+      <div class="ctx-label">취향의 공백</div>
+      <div class="ctx-text">AI가 선택을 대신하면서 취향이 소멸하는 시대. 살아남는 것은 진정성 있는 브랜드뿐입니다.</div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-icon">🌊</div>
+      <div class="ctx-label">단절에 대한 갈망</div>
+      <div class="ctx-text">먼 곳으로 여행을 가거나, 완전히 단절되고 싶은 욕구. 극장은 이 역할을 도심 한복판에서 할 수 있습니다.</div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-icon">🏙️</div>
+      <div class="ctx-label">진정성의 시대</div>
+      <div class="ctx-text">규모보다 진정성이 중요해지는 한국 시장. 작고 진심인 곳을 찾는 시대로 접어들고 있습니다.</div>
+    </div>
+  </div>
+
+  <div class="big-quote">
+    <p>"극장은 어둡고, 폰을 볼 수 없고, 낯선 사람들과 같은 감정을 나누고, 인간이 만든 이야기를 보는 곳입니다. AI도, OTT도 줄 수 없는 경험이 이미 여기 있습니다."</p>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="sec-num">02 · 브랜드 철학</div>
+  <h2 class="sec-title">가장 인간다운<br>공간의 정수</h2>
+  <div class="div-line"></div>
+  <p class="sec-desc">지금 CGV는 '어떻게 하면 더 팔까'에만 집중하고 있습니다. '우리는 왜 존재하는가'에 대한 답이 필요합니다.</p>
+
+  <div class="vs-table">
+    <div class="vs-col">
+      <div class="vs-label">지금의 CGV</div>
+      <div class="vs-item">OTT보다 콘텐츠가 좋은가?</div>
+      <div class="vs-item">더 많은 할인을 제공하는가?</div>
+      <div class="vs-item">더 많은 사람이 오는가?</div>
+      <div class="vs-item">볼 영화가 있을 때 가는 곳</div>
+      <div class="vs-item">할인받아서 가는 곳</div>
+    </div>
+    <div class="vs-sep">vs</div>
+    <div class="vs-col right">
+      <div class="vs-label">제안하는 CGV</div>
+      <div class="vs-item">OTT가 줄 수 없는 경험을 파는가?</div>
+      <div class="vs-item">할인 없이도 오고 싶은 곳인가?</div>
+      <div class="vs-item">오면 다시 오고 싶은 사람이 되는가?</div>
+      <div class="vs-item">가고 싶어서 가는 곳</div>
+      <div class="vs-item">돈 내고 가고 싶은 곳</div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-word">밀도</div>
+      <div class="pillar-desc">일상과 완전히 단절되는 2시간의 밀도 있는 경험</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-word">몰입</div>
+      <div class="pillar-desc">핸드폰을 볼 수 없고, 생각을 끄고 쉴 수 있는 공간</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-word">인간다움</div>
+      <div class="pillar-desc">인간이 만든 이야기를 인간답게 경험하는 시간</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-word">회복</div>
+      <div class="pillar-desc">외롭고 바쁜 사람들이 기꺼이 찾는 회복의 공간</div>
+    </div>
+  </div>
+
+  <div class="big-quote">
+    <p>"더현대가 백화점을 공원으로 만들었듯,<br>CGV는 극장을 인간이 숨 쉬러 오는 곳으로 만들어야 합니다."</p>
+    <span>브랜드 철학은 캠페인이 아닌, 사업 의사결정의 궤적에서 만들어집니다.</span>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section id="strategy">
+  <div class="sec-num">03 · 전략 방향</div>
+  <h2 class="sec-title">하나의 방향</h2>
+  <div class="div-line"></div>
+  <p class="sec-desc">돈 없이 할 수 있는 것부터 주목도를 만들고, 증명되면 자본이 따라오는 구조. 브랜드 재정립 하나에 집중합니다.</p>
+
+  <div class="track track-b" style="max-width:600px;">
+    <div class="track-tag">단 하나의 방향</div>
+    <div class="track-title">브랜드 재정립</div>
+    <div class="track-time">지금 당장 시작 → 3년</div>
+    <div class="track-item"><div class="track-dot"></div><p>브랜드 선언 캠페인 — "CGV는 영화관이 아닙니다"</p></div>
+    <div class="track-item"><div class="track-dot"></div><p>거점 극장 1개 완전 재설계 (성수/한남 타겟)</p></div>
+    <div class="track-item"><div class="track-dot"></div><p>연차상영회 — "오늘 하루 도망쳐도 됩니다"</p></div>
+    <div class="track-item"><div class="track-dot"></div><p>감독 인터뷰 시리즈, 자체 매거진/뉴스레터</p></div>
+  </div>
+</section>
+
+<!-- INITIATIVES -->
+<section id="initiatives">
+  <div class="sec-num">04 · 실행 계획</div>
+  <h2 class="sec-title">6가지 핵심 이니셔티브</h2>
+  <div class="div-line"></div>
+  <p class="sec-desc">당신이 제안한 아이디어들이 하나의 철학 아래 연결됩니다.</p>
+    <div class="init-row header">
+      <div class="init-cell">#</div>
+      <div class="init-cell">이니셔티브</div>
+      <div class="init-cell">핵심 내용</div>
+      <div class="init-cell">시계</div>
+    </div>
+    <div class="init-row">
+      <div class="init-cell"><span class="init-num">01</span></div>
+      <div class="init-cell"><span class="init-name">브랜드 선언</span></div>
+      <div class="init-cell"><span class="init-desc">"CGV는 영화관이 아닙니다" 캠페인. 혼자 온 직장인, 지친 부모를 주인공으로 한 브랜드 필름. 자본보다 용기가 필요한 단계.</span></div>
+      <div class="init-cell"><span class="init-tag tag-now">즉시</span></div>
+    </div>
+    <div class="init-row">
+      <div class="init-cell"><span class="init-num">02</span></div>
+      <div class="init-cell"><span class="init-name">연차상영회</span></div>
+      <div class="init-cell"><span class="init-desc">"오늘 하루 도망쳐도 됩니다." 기업 B2B 복지 패키지 + 개인 연차 인증 이벤트. 영화가 아닌 일상 탈출 자체를 파는 것.</span></div>
+      <div class="init-cell"><span class="init-tag tag-now">즉시</span></div>
+    </div>
+    <div class="init-row">
+      <div class="init-cell"><span class="init-num">03</span></div>
+      <div class="init-cell"><span class="init-name">자체 콘텐츠</span></div>
+      <div class="init-cell"><span class="init-desc">박찬욱·봉준호 등 감독 인터뷰 시리즈 "왜 극장이어야 하는가". 유튜브 → 매거진 확장. 무비랜드 결의 아카이브.</span></div>
+      <div class="init-cell"><span class="init-tag tag-now">즉시</span></div>
+    </div>
+    <div class="init-row">
+      <div class="init-cell"><span class="init-num">04</span></div>
+      <div class="init-cell"><span class="init-name">거점 극장 재설계</span></div>
+      <div class="init-cell"><span class="init-desc">성수/한남 거점 1개. 알바알토풍 로비, 로컬 커피 브랜드, 전 좌석 리클라이너, 관람 후 라운지. 더현대 방식.</span></div>
+      <div class="init-cell"><span class="init-tag tag-mid">6–18개월</span></div>
+    </div>
+    <div class="init-row">
+      <div class="init-cell"><span class="init-num">05</span></div>
+      <div class="init-cell"><span class="init-name">공간 철학 전국화</span></div>
+      <div class="init-cell"><span class="init-desc">거점 검증 후 전국 확장. 각 극장이 지역 개성을 살린 공간으로. 상업적 냄새를 걷어내고 공간이 말하게 두기.</span></div>
+      <div class="init-cell"><span class="init-tag tag-long">2–5년</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="sec-num">05 · 결론</div>
+  <div class="div-line"></div>
+  <p class="closing-main">그 선언은 자본이 없어도<br><em>지금 당장 시작할 수 있습니다.</em></p>
+  <p class="closing-sub">넷플릭스가 아무리 좋아져도, AI가 아무리 발전해도 — 어두운 공간에서 낯선 사람들과 같은 감정을 느끼는 2시간은 대체될 수 없습니다. CGV는 이것을 아직 브랜드 언어로 말하지 못하고 있습니다. 더현대가 백화점을 공원으로 만들었듯, CGV는 극장을 인간이 숨 쉬러 오는 곳으로 만들어야 합니다.</p>
+</section>
+
+<script>
+  const sections = ['cover','context','philosophy','strategy','initiatives','closing'];
+
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        document.querySelectorAll('.scroll-dot').forEach((d,i) => {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+</body>
+</html>
